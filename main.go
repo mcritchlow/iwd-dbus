@@ -8,26 +8,12 @@ import (
 	iwd "github.com/shibumi/iwd"
 )
 
-const objectIwd = "net.connman.iwd"
-
 func main() {
 	conn, err := dbus.ConnectSystemBus()
 	if err != nil {
 		panic(err)
 	}
 	defer conn.Close()
-
-	// var s []string
-	// err = conn.BusObject().Call("org.freedesktop.DBus.ListNames", 0).Store(&s)
-	// if err != nil {
-	// 	fmt.Fprintln(os.Stderr, "Failed to get list of owned names:", err)
-	// 	os.Exit(1)
-	// }
-	//
-	// fmt.Println("Currently owned names on the session bus:")
-	// for _, v := range s {
-	// 	fmt.Println(v)
-	// }
 
 	iwdConnection := iwd.New(conn)
 	for _, v := range iwdConnection.Stations {
